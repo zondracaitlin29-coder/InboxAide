@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox Aide SA | Professional Inbox Management</title>
+    <style>
+        /* Cohesive Brand Color Palette pulled directly from your logo */
+        :root {
+            --brand-olive: #4E684E;       /* Deep olive green from logo */
+            --brand-terracotta: #D98353;  /* Muted warm orange from logo center */
+            --bg-cream: #FAF7F0;          /* Warm luxury cream background */
+            --text-navy: #1A2530;          /* Dominant charcoal navy for premium text */
+            --card-bg: #FFFFFF;
+            --border-color: #E2DBD0;
+            --text-muted: #5A6A7A;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body { 
+            background-color: var(--bg-cream); 
+            color: var(--text-navy); 
+            line-height: 1.6; 
+            padding: 0;
+        }
+        
+        .wrapper { 
+            max-width: 480px; 
+            margin: 0 auto; 
+            background: var(--bg-cream);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.03);
+        }
+
+        /* Brand Navigation Header */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-cream);
+        }
+        .logo-box {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            margin-right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .brand-titles {
+            display: flex;
+            flex-direction: column;
+        }
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            color: var(--text-navy);
+            line-height: 1.2;
+        }
+        .brand-tagline {
+            font-size: 0.75rem;
+            color: var(--brand-olive);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        
+        /* Typography & Layout spacing */
+        section { 
+            padding: 48px 24px; 
+            border-bottom: 1px solid var(--border-color); 
+        }
+        h1 { 
+            font-size: 2.2rem; 
+            line-height: 1.15; 
+            margin-bottom: 18px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+        }
+        h2 { 
+            font-size: 1.65rem; 
+            line-height: 1.25; 
+            margin-bottom: 24px; 
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        .section-intro {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+        
+        /* Premium Action Buttons */
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 18px; 
+            text-align: center; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            font-size: 1.05rem; 
+            transition: transform 0.2s, background 0.2s;
+            border: none;
+        }
+        .btn-navy { 
+            background-color: var(--text-navy); 
+            color: #FFFFFF; 
+        }
+        .btn-terracotta { 
+            background-color: var(--brand-terracotta); 
+            color: #FFFFFF; 
+        }
+        
+        /* High-Conversion Value Cards */
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 24px; 
+            border-radius: 12px; 
+            margin-bottom: 18px; 
+        }
+        .card h3 { 
+            font-size: 1.2rem; 
+            margin-bottom: 8px; 
+            font-weight: 700; 
+            color: var(--text-navy);
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .badge {
+            display: inline-block;
+            background: #EAF0EA;
+            color: var(--brand-olive);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        /* High-Converting Pricing Section */
+        .pricing-card {
+            border: 2px solid var(--brand-olive);
+            background: var(--card-bg);
+            padding: 32px 24px;
+            border-radius: 16px;
+            position: relative;
+        }
+        .price-tag {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-navy);
+            line-height: 1;
+        }
+        .price-period {
+            font-size: 1.05rem;
+            color: var(--brand-olive);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .price-subtext {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .checklist {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .checklist li {
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start;
+            color: var(--text-navy);
+        }
+        .checklist-bullet {
+            color: var(--brand-olive);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Dynamic Product Showcase Section */
+        .product-section {
+            background: #111822; /* Rich dark tone matching your luxury toolkit layout */
+            color: #FFFFFF;
+        }
+        .product-section h2 { color: #FFFFFF; }
+        .product-section .section-intro { color: #94A3B8; }
+        
+        .product-image-container {
+            width: 100%;
+            max-width: 290px;
+            margin: 32px auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            overflow: hidden;
+            border: 1px solid #2D3A4A;
+        }
+        .product-display-img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* Audit Box Conversion Frame */
+        .audit-box {
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--brand-terracotta);
+            border-radius: 12px;
+            background: #FFFFFF;
+            padding: 32px 24px;
+        }
+
+        /* Step Layout */
+        .step-num { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            color: var(--brand-terracotta); 
+            margin-bottom: 4px; 
+            letter-spacing: 1px;
+        }
+        
+        footer { 
+            text-align: center; 
+            padding: 48px 24px; 
+            font-size: 0.85rem; 
+            color: var(--text-muted);
+            background: var(--bg-cream);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <nav>
+            <div class="logo-box">
+                <img src="https://i.postimg.cc/6pr85YVT/Photoroom-20260226-075949050.png" alt="Inbox Aide SA Logo" class="logo-img">
+            </div>
+            <div class="brand-titles">
+                <span class="brand-name">Inbox Aide SA</span>
+                <span class="brand-tagline">Premium Business Support</span>
+            </div>
+        </nav>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 1: HERO - Clear, single-focus value proposition -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section>
+            <h1>Never Lose a Lead Again. We Manage Your Inboxes While You Scale.</h1>
+            <p class="section-intro">Stop letting ready-to-buy clients slip through the cracks. We provide high-end, reliable social media comment and inquiry management built specifically for busy South African entrepreneurs.</p>
+            <a href="#audit-slots-component" class="btn btn-navy">Get Your Free Audit</a>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 2: WHY TRUST US - Build credibility fast -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section style="background: #F3EFE6;">
+            <h2>Why South African Businesses Trust Us</h2>
+            <p class="section-intro">Most virtual assistants check messages once a day. We understand that in the digital space, a 15-minute delay means a lost sale. Here is how we safeguard your revenue:</p>
+            
+            <div class="card">
+                <span class="badge">Speed</span>
+                <h3>Lightning-Fast Conversion</h3>
+                <p>We perform hourly message sweeps during operational hours. Curious commenters are converted into paying clients before they lose interest or look elsewhere.</p>
+            </div>
+
+            <div class="card">
+                <span class="badge">Expertise</span>
+                <h3>Intermediate Level Strategies</h3>
+                <p>We don't just paste generic text. We learn your brand's unique voice, handling complex FAQs, sorting real intent from noise, and gracefully escalating deep issues directly to you.</p>
+            </div>
+
+            <div class="card">
+                <span class="badge">Retention</span>
+                <h3>Proactive Follow-Ups</h3>
+                <p>If a client inquires about pricing but drops off, we follow up strategically within your protocols to close the loop and secure the booking.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 3: HOW IT WORKS - Remove friction, show the path -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section>
+            <h2>Your Streamlined Onboarding</h2>
+            <p class="section-intro">Getting started is simple. Three straightforward steps from signup to active deployment:</p>
+            
+            <div class="card">
+                <div class="step-num">Step 01</div>
+                <h3>Secure Intake</h3>
+                <p>Complete our comprehensive questionnaire and safely hand over your common response frameworks.</p>
+            </div>
+            <div class="card">
+                <div class="step-num">Step 02</div>
+                <h3>Active Deployment</h3>
+                <p>Our team steps into your accounts during official operational hours, filtering public noise and handling inquiries flawlessly.</p>
+            </div>
+            <div class="card">
+                <div class="step-num">Step 03</div>
+                <h3>Uncapped Freedom</h3>
+                <p>You step completely away from the notification trap, focusing entirely on delivery while your backend system closes sales.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 4: PRICING - Positioned AFTER process understanding -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section>
+            <h2>Transparent Starter Pricing</h2>
+            <p class="section-intro">No hidden fees, no long contracts. Premium, elite inbox care designed to pay for itself by saving your sales.</p>
+            
+            <div class="pricing-card">
+                <div class="badge" style="background: var(--brand-olive); color: white;">Starter Tier Care</div>
+                <div class="price-tag">R450</div>
+                <div class="price-period">per week</div>
+                <div class="price-subtext">Perfect for established product or service providers. Fees are paid upfront via secure EFT or PayShap.</div>
+                
+                <ul class="checklist">
+                    <li><span class="checklist-bullet">✓</span> Monday – Friday, 09:00 – 17:00 active coverage</li>
+                    <li><span class="checklist-bullet">✓</span> Intensive hourly check sweeps for rapid replies</li>
+                    <li><span class="checklist-bullet">✓</span> Direct comment engagement & conversation steering</li>
+                    <li><span class="checklist-bullet">✓</span> Detailed filtering to capture and flag hot sales leads</li>
+                    <li><span class="checklist-bullet">✓</span> Custom Facebook DM and WhatsApp management combined</li>
+                    <li><span class="checklist-bullet">✓</span> Weekly summary sheet outlining lead volume and trends</li>
+                </ul>
+                
+                <a href="https://form.jotform.com/261363512824050" class="btn btn-navy">Get Started Today</a>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 5: FREE AUDIT LEAD MAGNET (High-Value Position) -->
+        <!-- MOVED UP - This is your primary conversion tool -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section id="audit-slots-component" style="padding: 48px 24px; border-bottom: 1px solid var(--border-color); background: var(--bg-cream);">
+            
+            <h2 style="font-size: 1.65rem; line-height: 1.25; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.3px; color: var(--text-navy);">Lock In Your Free Weekly Audit</h2>
+            <p class="section-intro" style="margin-bottom: 32px;">Limited slots available. Reserve yours before they fill up. We'll evaluate your current inbox performance and send you a personalized, actionable report within 24 hours.</p>
+            
+            <!-- Counter Display -->
+            <div style="background: white; border: 2px solid var(--brand-terracotta); border-radius: 14px; padding: 28px 24px; margin-bottom: 28px; text-align: center;">
+                <p style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Available This Week</p>
+                <p style="font-size: 2.8rem; font-weight: 900; color: var(--brand-terracotta); line-height: 1; margin-bottom: 6px;">
+                    <span id="available-slots">3</span>
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">out of 3 slots</p>
+            </div>
+            
+            <!-- Form -->
+            <form id="audit-form" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                
+                <input 
+                    type="text" 
+                    id="audit-business-name" 
+                    placeholder="Business Name" 
+                    required
+                    style="padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: white; color: var(--text-navy); transition: all 0.2s;"
+                />
+                
+                <input 
+                    type="tel" 
+                    id="audit-whatsapp-number" 
+                    placeholder="WhatsApp Number (+27 81 234 5678)" 
+                    required
+                    style="padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: white; color: var(--text-navy); transition: all 0.2s;"
+                />
+                
+                <button 
+                    type="submit" 
+                    id="audit-submit-btn"
+                    style="padding: 16px 18px; background-color: var(--brand-terracotta); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: all 0.2s; font-family: inherit;"
+                >
+                    Reserve Your Slot
+                </button>
+            </form>
+            
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; line-height: 1.4;">
+                💬 We'll contact you via WhatsApp within 24 hours with your personalized audit.
+            </p>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 6: STILL UNSURE? - Alternative path (repurposed) -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section>
+            <div class="audit-box">
+                <h2 style="margin-bottom: 12px; color: var(--text-navy);">Still Weighing Your Options?</h2>
+                <p style="margin-bottom: 24px; font-size: 0.95rem;">Not quite ready to book a full audit? Let's chat directly. We can answer questions about your specific business, evaluate your current setup, and map out a custom plan on WhatsApp.</p>
+                
+                <a href="https://wa.link/41ig98" class="btn btn-terracotta">Chat With Us on WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 7: DIY ALTERNATIVE - For those not ready to hire -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="product-section">
+            <h2>Prefer the DIY Approach?</h2>
+            <p class="section-intro">Not ready to outsource yet? We've created a professional WhatsApp response toolkit with copy-and-paste templates for every scenario.</p>
+            
+            <div class="product-image-container">
+                <img src="https://i.postimg.cc/KvzzymjH/Screenshot-20260518-101704-Chrome.jpg" alt="WhatsApp Response Toolkit Cover" class="product-display-img">
+            </div>
+
+            <p style="font-size: 0.95rem; text-align: center; margin-bottom: 24px; color: #E2E8F0;">Stop staring at a blank screen wondering how to word your replies. Instantly copy-and-paste high-converting templates covering payments, greetings, and customer retention parameters.</p>
+            
+            <a href="https://selar.co/237dq65411" class="btn btn-terracotta">Buy Toolkit Now</a>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SECTION 8: FINAL CALL TO ACTION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section style="text-align: center; background: #F3EFE6;">
+            <h2>Ready to Stop Losing Leads?</h2>
+            <p class="section-intro" style="margin-bottom: 24px;">Your first step is a free, personalized audit. No commitment. No credit card. Just a clear picture of where your inbox is costing you money.</p>
+            <a href="#audit-slots-component" class="btn btn-navy">Reserve Your Free Audit Slot</a>
+        </section>
+
+        <footer>
+            <p><strong>Inbox Aide SA</strong></p>
+            <p>Operating Hours: Monday – Friday | 09:00 – 17:00</p>
+            <p style="margin-top: 16px; opacity: 0.5;">© 2026. Built seamlessly for mobile-first workflows.</p>
+        </footer>
+
+    </div>
+
+    <script>
+    // ========== AUDIT SLOTS MANAGEMENT ==========
+    (function() {
+        const STORAGE_KEY = 'inboxAuditSlotsData';
+        const WEEKLY_LIMIT = 3;
+
+        // Calculate ISO week number for reliable weekly reset
+        function getWeekIdentifier(date) {
+            const d = new Date(date);
+            const thursday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            thursday.setDate(thursday.getDate() - thursday.getDay() + 4);
+            const jan4 = new Date(thursday.getFullYear(), 0, 4);
+            jan4.setDate(jan4.getDate() - jan4.getDay() + 4);
+            const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+            const weekNum = Math.round((thursday - jan4) / msPerWeek) + 1;
+            return weekNum + '-' + d.getFullYear();
+        }
+
+        // Initialize or restore slot count
+        function initSlots() {
+            const today = new Date().toISOString().split('T')[0];
+            const currentWeek = getWeekIdentifier(new Date());
+            
+            let data = localStorage.getItem(STORAGE_KEY);
+            
+            if (data) {
+                data = JSON.parse(data);
+                const storedWeek = getWeekIdentifier(new Date(data.lastResetDate));
+                
+                // Check if it's a new week
+                if (storedWeek !== currentWeek) {
+                    data = {
+                        slots: WEEKLY_LIMIT,
+                        lastResetDate: today
+                    };
+                }
+            } else {
+                data = {
+                    slots: WEEKLY_LIMIT,
+                    lastResetDate: today
+                };
+            }
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            updateDisplay(data.slots);
+        }
+
+        // Update UI based on slot count
+        function updateDisplay(slots) {
+            const slotsEl = document.getElementById('available-slots');
+            const form = document.getElementById('audit-form');
+            const submitBtn = document.getElementById('audit-submit-btn');
+
+            if (slotsEl) {
+                slotsEl.textContent = slots;
+            }
+
+            const isFull = slots <= 0;
+
+            if (form) {
+                const inputs = form.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.disabled = isFull;
+                    if (isFull) {
+                        input.style.opacity = '0.5';
+                        input.style.cursor = 'not-allowed';
+                    } else {
+                        input.style.opacity = '1';
+                        input.style.cursor = 'text';
+                    }
+                });
+            }
+
+            if (submitBtn) {
+                submitBtn.disabled = isFull;
+                if (isFull) {
+                    submitBtn.textContent = 'Slots Full for This Week';
+                    submitBtn.style.opacity = '0.5';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.style.backgroundColor = '#999';
+                } else {
+                    submitBtn.textContent = 'Reserve Your Slot';
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                    submitBtn.style.backgroundColor = 'var(--brand-terracotta)';
+                }
+            }
+        }
+
+        // Handle form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            let data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (data.slots > 0) {
+                data.slots--;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                updateDisplay(data.slots);
+
+                // Clear form
+                document.getElementById('audit-form').reset();
+
+                // Success feedback
+                alert('✓ Audit request received! Check your WhatsApp for next steps within 24 hours.');
+            }
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initSlots();
+            const form = document.getElementById('audit-form');
+            if (form) {
+                form.addEventListener('submit', handleSubmit);
+            }
+        });
+    })();
+    // ========== END AUDIT SLOTS MANAGEMENT ==========
+    </script>
+
+</body>
+</html>
